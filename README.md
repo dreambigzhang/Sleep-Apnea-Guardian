@@ -9,10 +9,11 @@
 - All requirements within requirements.txt (refer to above for installation)
 
 ## Installation
-$ git clone https://github.com/dreambigzhang/Sleep-Apnea-Guardian.git
-$ cd Sleep-Apnea-Guardian
-$ python3 main.py
-
+```sh
+git clone https://github.com/dreambigzhang/Sleep-Apnea-Guardian.git
+cd Sleep-Apnea-Guardian
+python3 main.py
+```
 
 
 
