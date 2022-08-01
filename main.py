@@ -83,7 +83,7 @@ class MenuWindow(QMainWindow):
 
         # self.setStyleSheet("background-color: gray;")
         # setting window title and icon
-        self.setWindowTitle("PyQt5 Menu")
+        self.setWindowTitle("Sleep Apnea Guardian")
         self.setWindowIcon(QtGui.QIcon("utils/logo_icon.jpg"))
 
         # init layout
@@ -142,7 +142,7 @@ class MenuWindow(QMainWindow):
         ### TITLE ###
         self.title = QLabel()
         self.title.setFont(QtGui.QFont("Arial", 32))
-        self.title.setText("Sleep Apnea Detector")
+        self.title.setText("Sleep Apnea Guardian")
         self.title.setAlignment(Qt.AlignCenter)
         self.header_layout.addWidget(self.title)
   
@@ -210,7 +210,7 @@ class MenuWindow(QMainWindow):
         ### INDICATOR ###
         self.indicator_label = QLabel("Label")
 
-        self.indicator = QPushButton("indicator")
+        self.indicator = QPushButton()
         self.indicator.setCheckable(True)
         self.indicator.setChecked(True)
         self.indicator.setProperty("isIndicator", True)
@@ -309,8 +309,10 @@ class MenuWindow(QMainWindow):
             event (?): The close event.
         """
 
-        event.ignore()
-        return
+
+        # TODO uncomment this!
+        # event.ignore()
+        # return
 
         # this code will autorun just before the window closes
         # we will check whether streams are running, if they are we will close them
@@ -338,7 +340,7 @@ class MenuWindow(QMainWindow):
         self.model_dropdown.setEnabled(True)
         self.type_dropdown.setEnabled(False)
         self.type_dropdown.setCurrentIndex(-1)
-        self.title.setText("Select model")
+        # self.title.setText("Select model")
         self.model_dropdown.clear()
         if self.hardware_dropdown.currentText() == BCI:
             self.model_dropdown.addItems([GANGLION, CYTON, CYTON_DAISY])
@@ -360,7 +362,7 @@ class MenuWindow(QMainWindow):
         self.bci_port.setEnabled(False)
         self.type_dropdown.setEnabled(True)
         self.type_dropdown.setCurrentIndex(-1)
-        self.title.setText("Select data type")
+        # self.title.setText("Select data type")
 
     def csv_name_changed(self):
         """Handles changes to the csv_name text field."""
@@ -391,11 +393,11 @@ class MenuWindow(QMainWindow):
         self.baseline_window_button.setEnabled(True)
         self.impedance_window_button.setEnabled(True)
         if self.data_type == CONNECT:
-            self.title.setText("Select BCI Hardware Port")
+            # self.title.setText("Select BCI Hardware Port")
             self.bci_port.setEnabled(True)
             self.board_id = get_board_id(self.data_type, self.hardware, self.model)
         elif self.data_type == SIMULATE:
-            self.title.setText("Check impedance or graph")
+            # self.title.setText("Check impedance or graph")
             self.board_id = -1
 
     def handle_bci_port(self):
@@ -406,11 +408,11 @@ class MenuWindow(QMainWindow):
             self.bci_serial_port = "COM" + self.bci_port.text()
             if self.data_type == CONNECT:
                 self.impedance_window_button.setEnabled(True)
-            self.title.setText("Check impedance or graph")
+            # self.title.setText("Check impedance or graph")
         else:
             self.bci_serial_port = None
             # print("Error: OpenBCI port # must be an integer.")
-            self.title.setText("Select BCI Hardware Port")
+            # self.title.setText("Select BCI Hardware Port")
 
     def handle_arduino_dropdown(self):
         """Handles actions within the arduino dropdown"""
