@@ -81,6 +81,8 @@ class graph_win():
             #print(i)
             self.sim_update(self.sim_data[lines*i:lines*(i+1),:])
             time.sleep(0.1)
+
+        self.detector.plot_summary()
     
 
     def read_csv(self):
@@ -103,7 +105,7 @@ class graph_win():
         beta1 = self.sim_getAverage(1,data,3)
         beta2 = self.sim_getAverage(4,data,3)
         averageDeltaToBeta = ((delta1+delta2)/2)/((beta1+beta2)/2)
-        print(averageDeltaToBeta)
+        # print(averageDeltaToBeta)
         
         state = self.detector.update(averageDeltaToBeta)
         self.setIndicator(state)

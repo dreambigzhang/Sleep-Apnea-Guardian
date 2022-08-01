@@ -32,7 +32,7 @@ class SleepApneaDetect:
         # Using np.roll to simulate a queue structure
         self.record = np.roll(self.record, -self.update_rate)
         self.record[(self.graph_length - self.update_rate)] = new_value
-        print(self.record[self.graph_length - 1])
+        # print(self.record[self.graph_length - 1])
         self.num_item_in_list += 1
         if plot_graph:
             self.plot_data()
@@ -72,7 +72,7 @@ class SleepApneaDetect:
         self.ax.fill_between(np.linspace(self.start + 3, self.end + 3, self.end - self.start + 1),
                              self.record[13:25], color="#EB75D3", alpha=0.4)
 
-        print(self.start, self.end)
+        # print(self.start, self.end)
 
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()

@@ -18,9 +18,14 @@ class VoiceAssistant:
         self.defaultResponse = ['goodnight', 'good morning', 'yes']
 
         print("Start speaking")
-        self.eng.say("Welcome to Sleep Apnea Detector. My name is Apnea!")
-        self.eng.runAndWait()
-        print("end speaking")
+        
+        self.my_speak("Welcome to Sleep Apnea Detector. My name is Apnea!")
+
+        print("inbetween")
+
+        self.my_speak("Hello World!")
+        
+        # self.eng.connect("finished-utterance", lambda string, bool: self.eng.stopLoop)
 
         self.usrname = self.username()
         self.eng.say("It's time for bed "+self.usrname)
@@ -29,7 +34,25 @@ class VoiceAssistant:
             query = self.takeCommand().lower()
         if 'goodnight' in query:
             self.eng.say("Sweet Dreams")
-        
+
+    def onEnd(self,name, completed):
+        print ('*** ENDING TTS LOOP ***', name, completed)
+        self.timer.stop()
+
+    def speakingLoop(self):
+        self.eng.iterate()
+
+    def my_speak(self, words):
+
+        self.eng.say(words)
+        self.eng.startLoop(False)
+
+        self.timer = QTimer()
+        self.timer.setInterval(50)
+        self.timer.timeout.connect(self.speakingLoop)
+        self.timer.start()
+
+        self.eng.endloop()
 
     def takeCommand(self):
         
@@ -55,6 +78,7 @@ class VoiceAssistant:
 
     def username(self):
         self.eng.say("What's your name?")
+
         usrname = self.takeCommand()
         return usrname
 
@@ -67,10 +91,12 @@ class VoiceAssistant:
         if 'good morning' in query:
             self.eng.say("Good Morning "+self.usrname + "!")
 
+
         self.eng.say("I made a graph of your sleep last night, would you like to see it?")
         query = self.takeCommand().lower()
         if 'yes' in query:
             self.eng.say('Here you go! You are welcome by the way')
+
         return True
 
     def username(self):

@@ -131,7 +131,7 @@ dmypy.json
 nathacks_env/
 
 # Data files
-*.csv
+# *.csv
 
 # vscode settings
 .vscode/

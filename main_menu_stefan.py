@@ -479,13 +479,17 @@ class MenuWindow(QMainWindow):
 
     def open_graph_window(self):
         """Opens the graph window, moves program control over."""
-        apnea  = VoiceAssistant()
+        self.apnea  = VoiceAssistant()
+
         if self.checks_for_window_creation():
             logger.info("MenuWindow is creating graph window")
             self.graph_window = graph_win(setIndicator=lambda state: self.indicator.setChecked(state))
         if apnea.listen_for_morning():
             # palot sleep record graph
             pass
+
+        self.graph_window.detector.plot_summary()
+
 
 
     def open_baseline_window(self):
