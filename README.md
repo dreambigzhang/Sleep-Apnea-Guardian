@@ -1,4 +1,4 @@
-<img src="https://neuralberta.tech/images/event/natHACKs/nathanGlow.png" height="250">
+<img src="logo.png" height="250">
 
 # NATHacks 2022 - Python Boiler
 
