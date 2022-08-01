@@ -135,7 +135,7 @@ class MenuWindow(QMainWindow):
 
         ## LOGO ##
         self.logo = QLabel()
-        self.logo.setPixmap(QPixmap("res/logo.png").scaled(200, 200, Qt.KeepAspectRatio))
+        self.logo.setPixmap(QPixmap("res/logo3.png").scaled(200, 200, Qt.KeepAspectRatio))
         self.logo.setAlignment(Qt.AlignCenter)
         self.header_layout.addWidget(self.logo)
 
