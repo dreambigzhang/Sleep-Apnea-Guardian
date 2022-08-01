@@ -8,6 +8,8 @@ This is a collection of tools created to help jumpstart users on working with BC
 
 ## Installation
 
+this is some text
+
 ### Requirements
 
 - [Python](https://www.python.org/downloads/) 3.9 or above
