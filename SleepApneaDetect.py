@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import time
+# import time
 # import test_menu as tm
 # import sys
 
@@ -8,13 +8,15 @@ import time
 class SleepApneaDetect:
     def __init__(self):
         self.record_length = 5  # We are keeping 15 seconds worth of data
-        self.graph_length = 30
+        self.graph_length = 30  # x-axis length
         self.record = np.zeros(self.graph_length)  # Array to store data
-        self.num_item_in_list = 0
-        self.sleep_apnea = False
+        self.num_item_in_list = 0  # Keeps track of the number of values we have
+        self.sleep_apnea = False  # To indicate whether the data shows signs of sleep apnea
         self.update_rate = 1  # updating every second
-        self.start, self.end = 0, 0
-        plt.rcParams['toolbar'] = 'None'
+        self.start, self.end = 0, 0  # The timestamp of when SA starts and ends
+        plt.rcParams['toolbar'] = 'None'  # Removes toolbar on the matplotlib window
+
+        # Generate and configure the graph
         self.fig, self.ax = plt.subplots()
         self.line1, = self.ax.plot(self.record)
         self.fig.show()
@@ -24,6 +26,9 @@ class SleepApneaDetect:
         plt.ylabel("Delta to Beta Ratio")
 
     def update(self, new_value, plot_graph=True):
+        """
+        Updates the graph live as we receive new data values
+        """
         # Using np.roll to simulate a queue structure
         self.record = np.roll(self.record, -self.update_rate)
         self.record[(self.graph_length - self.update_rate)] = new_value
@@ -32,6 +37,7 @@ class SleepApneaDetect:
         if plot_graph:
             self.plot_data()
 
+        # Checks whether the data exhibit signs of sleep apnea
         if not self.sleep_apnea:
             temp_bool = self.detect_start()
             if temp_bool:
@@ -50,23 +56,34 @@ class SleepApneaDetect:
         return self.sleep_apnea
 
     def plot_data(self):
+        """
+        Plots data live
+        """
         self.line1.set_ydata(self.record)
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
 
     def plot_summary(self):
+        """
+        Color codes the graph for summary analysis
+        """
         self.ax.fill_between(np.linspace(0, self.graph_length - 1, self.graph_length), self.record,
                              color="#FAC1AF", alpha=0.4)
         self.ax.fill_between(np.linspace(self.start + 3, self.end + 3, self.end - self.start + 1),
                              self.record[13:25], color="#EB75D3", alpha=0.4)
+
         print(self.start, self.end)
 
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
 
     def detect_start(self):
-        drop, old = 2, 3  # data compare ratio
+        """
+        Detect whether the data exhibits signs of sleep apnea using ratio comparison
+        """
+        drop, old = 2, 3  # data compare ratio: 2 seconds of feature vs. 3 seconds of normal
 
+        # Ensures that we have 5 seconds worth of data before analysis
         if self.num_item_in_list >= self.record_length:
             # Calculating average
             old_avg = sum(self.record[(self.graph_length - self.record_length):
@@ -86,12 +103,16 @@ class SleepApneaDetect:
                 return True  # Sleep Apnea
 
     def detect_end(self):
-        length = 3  # number of seconds over which we are averaging the value
+        """
+        Detects whether we have recovered from sleep apnea
+        """
+        length = 3  # 3 seconds of feature detection
         detection_ratio = 2.5
-
+        
+        # Ensures that we have 5 seconds worth of data before analysis
         if self.num_item_in_list >= self.record_length:
-            overall_avg = sum(self.record[(self.graph_length - self.record_length)
-                                          :(self.graph_length - length)]) / (self.record_length - length)
+            overall_avg = sum(self.record[(self.graph_length - self.record_length):
+                                          (self.graph_length - length)]) / (self.record_length - length)
             high_avg = sum(self.record[(self.graph_length - length):]) / length
 
             """print(self.record[(self.graph_length - self.record_length):(self.graph_length - length)])
