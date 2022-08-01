@@ -33,7 +33,7 @@ pip install -r requirements.txt
 ./<Environment-Name>/bin/activate  # ./python_boiler/Scripts/activate
 pip install -r requirements.txt
 
-### Windows (Powershell)
+#### Windows (Powershell)
 ```sh
 ./<Environment-Name>/Scripts/Activate.ps1
 pip install -r requirements.txt
