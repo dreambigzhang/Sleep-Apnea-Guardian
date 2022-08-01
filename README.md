@@ -1,4 +1,5 @@
-<img src="logo.png" height="250">
+![logo](https://user-images.githubusercontent.com/104746082/182058592-5b82cd53-871b-46cd-935d-53e75b052ed5.png)
+
 
 # NATHacks 2022 - Python Boiler
 
