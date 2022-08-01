@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-# import test_menu as tm
+import test_menu as tm
 import sys
 
 
@@ -13,6 +13,7 @@ class SleepApneaDetect:
         self.num_item_in_list = 0
         self.sleep_apnea = False
         self.update_rate = 1  # updating every second
+        self.start, self.end = 0, 0
         plt.rcParams['toolbar'] = 'None'
         self.fig, self.ax = plt.subplots()
         self.line1, = self.ax.plot(self.record)
@@ -22,11 +23,11 @@ class SleepApneaDetect:
         plt.xlabel("Seconds (s)")
         plt.ylabel("Delta to Beta Ratio")
 
-    def update(self, new_value, plot_graph="True"):
+    def update(self, new_value, plot_graph=True):
         # Using np.roll to simulate a queue structure
         self.record = np.roll(self.record, -self.update_rate)
         self.record[(self.graph_length - self.update_rate)] = new_value
-        # print(self.record[self.graph_length - 1])
+        print(self.record[self.graph_length - 1])
         self.num_item_in_list += 1
         if plot_graph:
             self.plot_data()
@@ -35,19 +36,30 @@ class SleepApneaDetect:
             temp_bool = self.detect_start()
             if temp_bool:
                 self.sleep_apnea = temp_bool
+                self.start = self.num_item_in_list
                 print("Sleep Apnea")
                 return True
         else:
             temp_bool = self.detect_end()
             if temp_bool is False:
                 self.sleep_apnea = temp_bool
+                self.end = self.num_item_in_list
                 print("Safe")
                 return False
         # time.sleep(1)
-        return self.sleep_apnea
 
     def plot_data(self):
         self.line1.set_ydata(self.record)
+        self.fig.canvas.draw()
+        self.fig.canvas.flush_events()
+
+    def plot_summary(self):
+        self.ax.fill_between(np.linspace(0, self.graph_length - 1, self.graph_length), self.record,
+                             color="#FAC1AF", alpha=0.4)
+        self.ax.fill_between(np.linspace(self.start + 3, self.end + 3, self.end - self.start + 1),
+                             self.record[13:25], color="#EB75D3", alpha=0.4)
+        print(self.start, self.end)
+
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
 
@@ -96,9 +108,9 @@ class SleepApneaDetect:
 
 if __name__ == "__main__":
     data = SleepApneaDetect()
-    app = tm.QApplication(sys.argv)
-    win = tm.MenuWindow()
-    win.show()
+    # app = tm.QApplication(sys.argv)
+    # win = tm.MenuWindow()
+    # win.show()
     testData = [5.715187348624481, 5.673257720967051, 5.649467225521545, 5.665105595989914,
                 5.737902873218203, 5.731773638799287, 5.7283130478142565, 5.565140710684277, 2.5610874026885915,
                 1.1098416466178829, 1.484445742223451,
@@ -112,5 +124,7 @@ if __name__ == "__main__":
                 7.828288934925429]
     for i in testData:
         data.update(i)
-        win.sa_bool = data.sleep_apnea
-    sys.exit(app.exec())
+        # win.sa_bool = data.sleep_apnea
+    data.plot_summary()
+    plt.show()
+    # sys.exit(app.exec())
