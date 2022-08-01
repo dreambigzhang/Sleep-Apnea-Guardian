@@ -27,7 +27,7 @@ class VoiceAssistant:
         while self.defaultResponse[0] not in query:
             query = self.takeCommand().lower()
         if 'goodnight' in query:
-            self.eng.say("Sweet Dreams")
+            self.eng.say("Sweet Dreams, sleep monitoring activated")
             self.eng.runAndWait()
 
 
@@ -75,7 +75,7 @@ class VoiceAssistant:
         self.eng.runAndWait()
         query = self.takeCommand().lower()
         if 'yes' in query:
-            self.eng.say('Here you go! You are welcome by the way')
+            self.eng.say('Here you go!')
             self.eng.runAndWait()
 
         return True
@@ -92,4 +92,4 @@ if __name__ == "__main__":
         eng = pyttsx3.init()
         voice = eng.getProperty('voices') #get the available voices
         eng.setProperty('voice', voice[i].id) #0 basic male #7 reddit male #10 female #17 aussie 
-        self.eng.say("Welcome to Sleep Apnea Detector. My name is Apnea!")
+        eng.say("Welcome to Sleep Apnea Detector. My name is Apnea!")
