@@ -1,10 +1,7 @@
 ![logo](https://user-images.githubusercontent.com/104746082/182058592-5b82cd53-871b-46cd-935d-53e75b052ed5.png)
 
 
-# NATHacks 2022 - Python Boiler
-
-This is a collection of tools created to help jumpstart users on working with BCI hardware.
-
+# Sleep Apnea Guardian - NATHacks 2022
 
 ## Installation
 
