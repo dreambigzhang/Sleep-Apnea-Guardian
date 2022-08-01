@@ -309,10 +309,8 @@ class MenuWindow(QMainWindow):
             event (?): The close event.
         """
 
-
-        # TODO uncomment this!
-        # event.ignore()
-        # return
+        event.ignore()
+        return
 
         # this code will autorun just before the window closes
         # we will check whether streams are running, if they are we will close them
