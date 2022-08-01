@@ -3,7 +3,7 @@
 
 # Sleep Apnea Guardian - natHACKS 2022
 
-Our solution is to detect sleep apnea by analyzing the brain waves of sleeping patients. We use a comfortable and discreet wearable headband worn during sleep and software to analyze the data. When a person stops breathing, their brain responds by sending a certain pattern of signals which our software can detect. We can then wake the person out of their deep sleep by playing a gentle sound so they can resume breathing, without waking them up completely. 
+Sleep Apnea Guardian is an affordable and non-invasive solution to detect sleep apnea using EEG brain signal. We use a comfortable and discreet wearable headband during sleep. When a person stops breathing, their brain responds by sending a certain pattern of signals which our software can detect and provide instant feedback. We also record all the apnea events throughout the night to create a detailed sleep quality report in the morning. With accessibility in mind, we developed a voice assistant using speech recognition to enable full voice control and customization. Affordable, non-invasive, and user-friendly, Sleep Apnea Guardian has great potential to serve high risk populations, relieve stress on the healthcare system, and help everyone get better sleep.
 
 
 ### Requirements
