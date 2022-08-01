@@ -14,10 +14,11 @@ class VoiceAssistant:
     def __init__(self):
         self.eng = pyttsx3.init() #initialize an instance
         self.voice = self.eng.getProperty('voices') #get the available voices
-        self.eng.setProperty('voice', self.voice[7].id) #0 basic male #7 reddit male #10 female #17 aussie 
+        self.eng.setProperty('voice', self.voice[33].id) #0 basic male #7 reddit male #10 female #17 aussie
+        # 26 female (good) 33 female (siri) 
         self.defaultResponse = ['goodnight', 'good morning', 'yes']
 
-        self.eng.say("Welcome to Sleep Apnea Detector. My name is Apnea!")
+        self.eng.say("Welcome to Sleep Apnea Guardian. My name is Apnea!")
         self.eng.runAndWait()
         
         self.usrname = self.username()
@@ -27,7 +28,9 @@ class VoiceAssistant:
         while self.defaultResponse[0] not in query:
             query = self.takeCommand().lower()
         if 'goodnight' in query:
-            self.eng.say("Sweet Dreams, sleep monitoring activated")
+            self.eng.say("Sweet Dreams.")
+            self.eng.runAndWait()
+            self.eng.say("Sleep monitoring activated")
             self.eng.runAndWait()
 
 
@@ -87,9 +90,10 @@ class VoiceAssistant:
         return usrname
 
 if __name__ == "__main__":
-    for i in range(20):
+    for i in range(48):
         print(i)
         eng = pyttsx3.init()
         voice = eng.getProperty('voices') #get the available voices
         eng.setProperty('voice', voice[i].id) #0 basic male #7 reddit male #10 female #17 aussie 
         eng.say("Welcome to Sleep Apnea Detector. My name is Apnea!")
+        eng.runAndWait()
