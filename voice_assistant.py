@@ -8,7 +8,7 @@ import pyaudio
 import time
 from playsound import playsound
 
-import threading
+from PyQt5.QtCore import QTimer
 
 class VoiceAssistant:
     def __init__(self):
@@ -17,47 +17,25 @@ class VoiceAssistant:
         self.eng.setProperty('voice', self.voice[7].id) #0 basic male #7 reddit male #10 female #17 aussie 
         self.defaultResponse = ['goodnight', 'good morning', 'yes']
 
-        print("Start speaking")
+        self.eng.say("Welcome to Sleep Apnea Detector. My name is Apnea!")
+        self.eng.runAndWait()
         
-        self.my_speak("Welcome to Sleep Apnea Detector. My name is Apnea!")
-
-        print("inbetween")
-
-        self.my_speak("Hello World!")
-        
-        # self.eng.connect("finished-utterance", lambda string, bool: self.eng.stopLoop)
-
         self.usrname = self.username()
         self.eng.say("It's time for bed "+self.usrname)
+        self.eng.runAndWait()
         query = ''
         while self.defaultResponse[0] not in query:
             query = self.takeCommand().lower()
         if 'goodnight' in query:
             self.eng.say("Sweet Dreams")
+            self.eng.runAndWait()
 
-    def onEnd(self,name, completed):
-        print ('*** ENDING TTS LOOP ***', name, completed)
-        self.timer.stop()
 
-    def speakingLoop(self):
-        self.eng.iterate()
-
-    def my_speak(self, words):
-
-        self.eng.say(words)
-        self.eng.startLoop(False)
-
-        self.timer = QTimer()
-        self.timer.setInterval(50)
-        self.timer.timeout.connect(self.speakingLoop)
-        self.timer.start()
-
-        self.eng.endloop()
 
     def takeCommand(self):
         
         r = sr.Recognizer()
-        r.energy_threshold = 1000
+        r.energy_threshold = 3000
 
         with sr.Microphone() as source:
             print("Listening...")
@@ -90,17 +68,21 @@ class VoiceAssistant:
             query = self.takeCommand().lower()
         if 'good morning' in query:
             self.eng.say("Good Morning "+self.usrname + "!")
+            self.eng.runAndWait()
 
 
         self.eng.say("I made a graph of your sleep last night, would you like to see it?")
+        self.eng.runAndWait()
         query = self.takeCommand().lower()
         if 'yes' in query:
             self.eng.say('Here you go! You are welcome by the way')
+            self.eng.runAndWait()
 
         return True
 
     def username(self):
         self.eng.say("What's your name?")
+        self.eng.runAndWait()
         usrname = self.takeCommand()
         return usrname
 

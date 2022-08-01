@@ -308,6 +308,10 @@ class MenuWindow(QMainWindow):
         Args:
             event (?): The close event.
         """
+
+        event.ignore()
+        return
+
         # this code will autorun just before the window closes
         # we will check whether streams are running, if they are we will close them
         logger.info("Closing")
@@ -484,7 +488,7 @@ class MenuWindow(QMainWindow):
         if self.checks_for_window_creation():
             logger.info("MenuWindow is creating graph window")
             self.graph_window = graph_win(setIndicator=lambda state: self.indicator.setChecked(state))
-        if apnea.listen_for_morning():
+        if self.apnea.listen_for_morning():
             # palot sleep record graph
             pass
 

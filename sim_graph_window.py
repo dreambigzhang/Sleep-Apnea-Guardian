@@ -81,8 +81,6 @@ class graph_win():
             #print(i)
             self.sim_update(self.sim_data[lines*i:lines*(i+1),:])
             time.sleep(0.1)
-
-        self.detector.plot_summary()
     
 
     def read_csv(self):
