@@ -7,9 +7,13 @@ Sleep Apnea Guardian is an affordable and non-invasive solution to detect sleep 
 
 ### Index
 main.py - GUI, flow control and starting point
+
 sim_graph_window.py - active sleep monitoring flow control and data preprocessing
+
 SleepApneaDetect.py - detect apnea and plot live/simulated data
+
 voice_assistant.py - voice recognition and audio instructions
+
 
 ### Requirements
 - [Python](https://www.python.org/downloads/) 3.9 or above
