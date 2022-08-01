@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-import test_menu as tm
-import sys
+# import test_menu as tm
+# import sys
 
 
 class SleepApneaDetect:
@@ -47,6 +47,7 @@ class SleepApneaDetect:
                 print("Safe")
                 return False
         # time.sleep(1)
+        return self.sleep_apnea
 
     def plot_data(self):
         self.line1.set_ydata(self.record)

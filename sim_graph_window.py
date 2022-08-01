@@ -84,7 +84,7 @@ class graph_win():
     
 
     def read_csv(self):
-        data = np.genfromtxt('record.csv',delimiter=',')
+        data = np.genfromtxt('res/record.csv',delimiter=',')
         print(data.shape)
         return data
     
