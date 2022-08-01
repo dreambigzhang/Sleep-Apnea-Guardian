@@ -208,7 +208,7 @@ class MenuWindow(QMainWindow):
         # self.arduino_process = None
 
         ### INDICATOR ###
-        self.indicator_label = QLabel("Label")
+        self.indicator_label = QLabel("Sleep Apnea Detected:")
 
         self.indicator = QPushButton()
         self.indicator.setCheckable(True)
@@ -225,6 +225,7 @@ class MenuWindow(QMainWindow):
         self.type_layout.setContentsMargins(10, 10, 10, 10)
         self.port_layout.setContentsMargins(10, 10, 10, 10)
         self.arduino_layout.setContentsMargins(10, 10, 10, 10)
+        self.indicator_layout.setContentsMargins(10, 10, 10, 10)
         self.layout.addLayout(self.header_layout, 0, 0, 1, -1, QtCore.Qt.AlignHCenter)
         self.layout.addLayout(self.hardware_layout, 1, 0)
         self.layout.addLayout(self.model_layout, 2, 0)
