@@ -27,8 +27,6 @@ cd Sleep-Apnea-Guardian
 python3 main.py
 ```
 
-
-
 Create a virtual environment to install the dependencies:
 ```sh
 python -m venv <Environment-Name>  # For example  $ python -m venv python_boiler
